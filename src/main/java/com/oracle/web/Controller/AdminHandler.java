@@ -120,13 +120,13 @@ public class AdminHandler {
     
 	   if(a!=null){
 			
-			response.getWriter().write("{\"valid\":\"false\"}");//������
+			response.getWriter().write("{\"valid\":\"false\"}");//不存在
 			
 		//return "redirect:/register.jsp";
 		
 	}else{
 			
-			response.getWriter().write("{\"valid\":\"true\"}");//����
+			response.getWriter().write("{\"valid\":\"true\"}");//存在
 			
 			//  return "redirect:/list";
 		}
