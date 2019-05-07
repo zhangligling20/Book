@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oracle.web.mapper.MonsterMapper">
+	<resultMap id="BaseResultMap" type="com.oracle.web.bean.Monster">
+		<id column="MONSTERID" jdbcType="INTEGER" property="monsterid" />
+		<result column="MOSTERNAME" jdbcType="VARCHAR" property="mostername" />
+		<result column="EMAIL" jdbcType="VARCHAR" property="email" />
+		<result column="BIRTHDAY" jdbcType="DATE" property="birthday" />
+		<result column="ENTRY" jdbcType="DATE" property="entry" />
+		<result column="SCHOOL" jdbcType="INTEGER" property="school" />
+    
+    
+	</resultMap>
+  
+	<resultMap id="BaseResultMap2" type="SubMonster">
+		<id column="MONSTERID" jdbcType="INTEGER" property="monsterid" />
+		<result column="MOSTERNAME" jdbcType="VARCHAR" property="mostername" />
+		<result column="EMAIL" jdbcType="VARCHAR" property="email" />
+		<result column="BIRTHDAY" jdbcType="DATE" property="birthday" />
+		<result column="ENTRY" jdbcType="DATE" property="entry" />
+  
+		<result column="SCHOOL" jdbcType="INTEGER" property="school" />
+		<!-- 映射对象：关联对象School -->
+		<association property="school1" javaType="School">
+			<id property="schoolid" column="schoolid"></id>
+			<result property="name" column="name"/>
+			<result property="address" column="address"/>
+  
+		</association> 
+  
+   
+		<!--  <association property="school"  column="schoolid" select="com.oracle.web.mapper.SchoolMapper.selectByPrimaryKey">
+
+			  </association> -->
+  
+	</resultMap>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from monster
+    where MONSTERID = #{monsterid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.oracle.web.bean.Monster">
+    insert into monster (MONSTERID, MOSTERNAME, EMAIL, 
+      BIRTHDAY, ENTRY, SCHOOL)
+    values (#{monsterid,jdbcType=INTEGER}, #{mostername,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=DATE}, #{entry,jdbcType=DATE}, #{school,jdbcType=INTEGER})
+	</insert>
+	<update id="updateByPrimaryKey" parameterType="com.oracle.web.bean.Monster">
+    update monster
+    set MOSTERNAME = #{mostername,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      BIRTHDAY = #{birthday,jdbcType=DATE},
+      ENTRY = #{entry,jdbcType=DATE},
+      SCHOOL = #{school,jdbcType=INTEGER}
+    where MONSTERID = #{monsterid,jdbcType=INTEGER}
+	</update>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select MONSTERID, MOSTERNAME, EMAIL, BIRTHDAY, ENTRY, SCHOOL
+    from monster
+    where MONSTERID = #{monsterid,jdbcType=INTEGER}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+    select *
+    from monster
+	</select>
+  
+  
+	<select id="selectAllWithOneSQL" resultMap="BaseResultMap2">
+    select *
+    from monster,school where monster.school=school.schoolid order by  
+    monsterid  asc 
+	</select>
+	<select id="showByPage" parameterType="java.lang.Integer" resultMap="BaseResultMap2">
+  	
+  	  select *  from  monster,school where monster.school=school.schoolid order by  monsterid  asc  limit #{index},2
+  	
+  	
+	</select> 
+	<select id="count" resultType="java.lang.Integer" >
+  	
+  	select count(*) from  monster
+	</select>
+	
+	<select id="showByPageHelper"  resultMap="BaseResultMap2">
+		
+		select *  from  monster,school where monster.school=school.schoolid order by  monsterid  asc 
+	</select>
+</mapper>
