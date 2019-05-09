@@ -3,23 +3,8 @@ package com.oracle.web.Service;
 import java.util.List;
 
 
-
-public interface AdminService {
-
-	
+public interface BookService {
 
 	
-	
-
-
-
-
-	
-
-	
-
-	
-	
-
 
 }

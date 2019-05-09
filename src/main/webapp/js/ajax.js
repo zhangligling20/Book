@@ -23,7 +23,7 @@
        	   	   	    }catch(e){
        	   	   	    
        	   	   	    	
-       	   	   	    	alert("IE");
+       	   	   	    	alert("抽了");
        	   	   	    	
        	   	   	    	throw e;
        	   	   	    	
@@ -89,7 +89,7 @@
        	
        	http.send(opt.params);
        	
-       	//4.锟�
+       	//4.�
        	
        	http.onreadystatechange=function(){
        		

@@ -1,22 +1,16 @@
 package com.oracle.web.mapper;
 
-
+import com.oracle.web.bean.Admin;
 import java.util.List;
 
-import com.oracle.web.bean.Admin;
-
 public interface AdminMapper {
-    int deleteByPrimaryKey(Integer aid);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Admin record);
 
-    Admin selectByPrimaryKey(Integer aid);
+    Admin selectByPrimaryKey(Integer id);
 
     List<Admin> selectAll();
 
     int updateByPrimaryKey(Admin record);
-
-	Admin validateName(String adminname);
-
-	Admin login2(Admin admin);
 }

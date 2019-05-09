@@ -10,7 +10,7 @@ import com.oracle.web.Service.AdminService;
 import com.oracle.web.bean.Admin;
 import com.oracle.web.mapper.AdminMapper;
 @Service
-public class AdminServiceimpl implements AdminService {
+public class FenleiServiceimpl implements AdminService {
    
 	
 	

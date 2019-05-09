@@ -3,5 +3,43 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+<!-- 引入外部的properties文件 -->
+<properties resource="jdbc.properties"></properties>
+<!-- 设置mybatis运行时行为 -->
+<!-- <settings>
+全局地开启或关闭配置文件中的所有映射器已经配置的任何缓存。默认=true
+<setting name="cacheEnabled" value="false"/>
+</settings>
+ -->
+<!-- typeAliases 别名处理器  ==>使用这个别名处理器，我们可以将一些名字很长的类，给他一个简洁的名字。
+2.  	特别说明，也可以给一个包下面的所有类都取别名==》默认是类名且不区分大小写：Person person
+     Worker worker
+-->
 
+<typeAliases>
+<!--  com.oracle.bean包下所有类起别名-->
+<package name="com.oracle.web.bean"/>
+
+</typeAliases>
+  <environments default="development">
+    <environment id="development">
+    <!-- 事务控制:默认jdbc -->
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+      <!-- 数据源：四大参数 -->
+        <property name="driver" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <mappers>
+  <!-- <mapper resource="com/oracle/mapping/WorkerMapper.xml"/> 
+    <mapper class="com.oracle.mapping.WorkerMapperAnnotation"/>
+    <mapper class="com.oracle.bean.Worker"/> -->
+    
+    <!-- com.oracle.bean这个包下所有的映射文件都加载进来，甚至加载了接口也会加载进来 -->
+     <package name="com.oracle.web.mapper"/> 
+  </mappers>
 </configuration>
